@@ -1,0 +1,23 @@
+version: '3'
+services:
+  test-task:
+    container_name: test_task
+    build: .
+    ports:
+      - "8080:8080"
+  prometheus:
+    image: prom/prometheus:v2.39.1
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:9.2.2
+    container_name: grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana/microservices-spring-boot-2-1_rev1.json:/var/lib/grafana/dashboards/microservices-spring-boot-2-1_rev1.json
