@@ -33,12 +33,12 @@ __________________
 
 <code>kubectl create configmap my-config --from-file=./grafana/microservices-spring-boot-2-1_rev1.json</code>
 
-#установить чарты с необходимыми values
+установить чарты с необходимыми values
 
 <code>helm install my-prometheus prometheus-community/prometheus -f ./k8s/prometheus/values2.yml</code>
 
 <code>helm install my-grafana grafana/grafana -f ./k8s/grafana/values.yml</code>
 
-#запустить приложение
+запустить приложение
 
 <code>kubectl apply -f deploy.yml</code>
