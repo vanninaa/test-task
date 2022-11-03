@@ -1,0 +1,23 @@
+management:
+  endpoints:
+    web: 
+      path-mapping:
+        prometheus: /prometheus/metrics
+      exposure:
+        include: "*"
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+    metrics:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
