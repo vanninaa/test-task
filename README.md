@@ -35,10 +35,13 @@ __________________
 
 установить чарты с необходимыми values
 
-<code>helm install my-prometheus prometheus-community/prometheus -f ./k8s/prometheus/values2.yml</code>
+<code>helm install my-prometheus prometheus-community/prometheus -f ./k8s/prometheus/values.yml</code>
 
 <code>helm install my-grafana grafana/grafana -f ./k8s/grafana/values.yml</code>
 
+для получения пароля к grafana выполнить: 
+<code>kubectl get secret --namespace default my-grafana2 -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code>
+
 запустить приложение
 
-<code>kubectl apply -f deploy.yml</code>
+<code>kubectl apply -f ./k8s/deploy.yml</code>
