@@ -1,36 +1,44 @@
-#запуск через docker-compose
+<h1>docker-compose</h1>
 
-#приложение доступно по порту 8080 prometheus по порту 9090 grafana по порту 3000
+в папке с проектом выполнить:
+<code>docker-compose up</code>
 
-docker-compose up
+
+сервисы доступны по следующим ссылкам:
+
+[приложение](http://localhost:8080/)
+
+[метрики приложения](http://localhost:8080/actuator/prometheus/metrics)
+
+[prometheus](http://localhost:9090/)</p>
+
+[grafana](http://localhost:3000/)
+<p>логин пароль для grafana <strong>admin</strong> <strong>admin</strong></p>
 __________________
-#через k8-s
+<h1>k8-s</h1>
 
-#сбилдить образ 
+сбилдить образ: docker build -t test-task . 
 
-docker build -t test-task . 
+загрузить образ в minikube: minikube image load test-task
 
-#загрузить образ в minikube
-minikube image load test-task
+загрузить и обновить чарты:
 
-#загрузить и обновить чарты
+<code>helm repo add my-repo https://charts.bitnami.com/bitnami</code>
 
-helm repo add my-repo https://charts.bitnami.com/bitnami
+<code>helm repo add comunity https://grafana.github.io/helm-charts</code>
 
-helm repo add comunity https://grafana.github.io/helm-charts
+<code>helm repo update</code>
 
-helm repo update
+создать configmap:
 
-#создать configmap
-
-kubectl create configmap my-config --from-file=./grafana/microservices-spring-boot-2-1_rev1.json
+<code>kubectl create configmap my-config --from-file=./grafana/microservices-spring-boot-2-1_rev1.json</code>
 
 #установить чарты с необходимыми values
 
-helm install my-prometheus prometheus-community/prometheus -f ./k8s/prometheus/values2.yml
+<code>helm install my-prometheus prometheus-community/prometheus -f ./k8s/prometheus/values2.yml</code>
 
-helm install my-grafana grafana/grafana -f ./k8s/grafana/values.yml
+<code>helm install my-grafana grafana/grafana -f ./k8s/grafana/values.yml</code>
 
 #запустить приложение
 
-kubectl apply -f deploy.yml
+<code>kubectl apply -f deploy.yml</code>
